@@ -1,36 +1,206 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <!-- TAGS REQUERIDOS -->
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale= 1.0" />
 
     <!-- SEO -->
 
-    <meta
-    name="description"
-    content="Vendemos las mejores camisetas originales para hombres, mujeres y niños"
-    />
+    <meta name="description" content="Vendemos las mejores camisetas originales para hombres, mujeres y niños">
 
-    <meta name="keywords" content="camisetas, futbol, selecciones, envios" />
+    <meta name="keywords" content="camisetas, futbol, selecciones, envios">
 
-    <meta name="author" content="Leo Escribano" />
+    <meta name="author" content="Leo Escribano">
 
-    <meta name="robots" content="index" />
+    <meta name="robots" content="index"/>
+
+
 
     <!-- favicon -->
     <link rel="shortcut icon" href="img/favicon.png" />
+
+    <!-- Bootstrap CCS - bootstrap.min.css -->
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <!-- MI CSS -->
 
     <link rel="stylesheet" href="css/style.css" />
 
     <title>Camisetas oficiales de equipos de fútbol</title>
-</head>
 
-<body>
-    <a href="index.html"><img src="img/logo.jpg" alt="logo de CASACASHOP" /></a>
+  </head>
 
-    <script src="./js/script.js"></script>
-</body>
+  <body>
+
+    <!-- NAV BAR - INICIO -->
+
+    <nav class="navbar navbar-expand-md" id="botonera">
+      <div class="container-fluid" id="font-nav">
+        <a class="navbar-brand" href="index.html"><img src="img/logo.jpg" alt="logo de CASACASHOP" /></a>
+      </div>
+    </nav>
+
+    <!-- CIERRA NAV BAR -->
+
+    <header>
+      
+    <div class="card border border-success rounded-2">
+      <p class="card-header bg-boxes text-white text-center border border-success rounded-2">
+        ENVÍOS GRATIS A TODO EL PAÍS A PARTIR DE $9.999 - 3,6 y 12 CUOTAS SIN
+        INTERÉS
+      </p>
+    </div>
+
+        <!-- CASACAS -->
+
+        <h4 class="text-center mt-3">CAMISETAS DISPONIBLES</h4>
+        <div class="row" id="cards"></div>
+
+
+        <div class="row m-3 text-center" id="lista-productos">
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-3">
+              <div class="card">
+                <img src="img/arg2022.jpg" alt="Camiseta Selección Argentina 2022" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">Selección de Argentina </h5>
+                  <p class="card-text">$ <span>35000</span></p>
+                  <button id="btn-comprar" value="1">Comprar</button>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-3">
+              <div class="card">
+                <img src="img/alemania.jpg" alt="Camiseta Selección Alemania" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">Selección de Alemania</h5>
+                  <p class="card-text">$ <span>15000</span></p>
+                  <button id="btn-comprar" value="2">Comprar</button>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-3">
+              <div class="card">
+                <img src="img/espana.jpg" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">Selección de España</h5>
+                  <p class="card-text">$ <span>18000</span></p>
+                  <button id="btn-comprar" value="3">Comprar</button>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-3">
+              <div class="card">
+                <img src="img/japon.jpg" alt="Camiseta animé Japón" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">Selección de Japón</h5>
+                  <p class="card-text">$ <span>12000</span></p>
+                  <button id="btn-comprar" value="4">Comprar</button>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-3">
+              <div class="card">
+                <img src="img/francia-opo.jpg" alt="Camiseta de la selección de Francia" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">Selección de Francia</h5>
+                  <p class="card-text">$ <span>20000</span></p>
+                  <button id="btn-comprar" value="5">Comprar</button>
+                </div>
+              </div>
+            </div>
+          
+            <div class="col-12 col-sm-4 col-md-3 col-lg-2 mb-3">
+              <div class="card">
+                <img src="img/indep.jpg" alt="Camiseta del CAI" class="card-img-top">
+                <div class="card-body">
+                  <h5 class="card-title">Club Atlético Independiente</h5>
+                  <p class="card-text">$ <span>7500</span></p>
+                  <button id="btn-comprar" value="6">Comprar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+<!-- SIMULADOR CARRITO -->
+          <div class="m-4">
+            <h4>Carrito de compras</h4>
+            <table class="table">
+              <tbody id="items"></tbody>
+              <tbody id="total-items"></tbody>
+              <tfoot>
+                <tr id="footer-carrito">
+                    <th scope="row" colspan="5">Carrito vacío. Seleccioná las camisetas que te gustaría comprar. </th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+
+          
+          
+      <div class="card">
+        <h1 class="card-header bg-boxes text-white text-center border border-success rounded-2">
+          TENEMOS LAS MEJORES CAMISETAS DE FÚTBOL, TANTO DE SELECCIONES COMO DE
+          EQUIPOS DE DIFERENTES PAÍSES.
+        </h1>
+      </div>
+
+      
+    </header>
+
+    <!-- fin del header -->
+    
+      <!-- INICIA MAP -->
+
+      <section>
+        <iframe class="img-fluid rounded mx-auto d-block mt-5"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13124.740011564898!2d-58.3673878!3d-34.67528!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x438c219aee66c1bb!2sAlto%20Avellaneda%20Shopping!5e0!3m2!1ses-419!2sar!4v1653772488468!5m2!1ses-419!2sar"
+          width="1200"
+          height="450"
+          style="border: 1px"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+      </section>
+
+      <!-- FIN MAP-->
+
+    </main>
+
+<!-- INICIA FOOTER -->
+
+    <footer class="mt-5 py-3 bg-boxes text-center text-white container-fluid">
+      <div class="mb-3">
+      <a class="text-deco" href="https://facebook.com" target="_blank">
+        <img id="redes" src="img/logo-facebook.png" alt="logotipo de facebook" />
+      </a>
+      <a id="redes" href="https://instagram.com" target="_blank">
+        <img id="redes" src="img/logo-insta.png" alt="logotipo de instagram" />
+      </a>
+      </div>
+      
+      <h6 class="text-white">
+        GRAL. GÜEMES 897 (ALTO AVELLANEDA) - LOCAL 10 - LUNES A VIERNES DE 10 A
+        20 HORAS. TEL:4222-2222
+      </h6>
+      
+      </footer>
+
+<!-- FIN FOOTER -->
+
+    <!-- BOOTSTRAP -->
+<script src="js/bootstrap.min.js"></script>
+
+    <!-- JS  -->
+<script src="js/script.js"></script>
+
+  </body>
 </html>
