@@ -62,7 +62,13 @@ items.addEventListener('click', e => {
         suma = suma - x.precio;
         items.innerHTML += "<div class='row col-lg-9'><div class='col-lg-5'><img src= "+ x.file +"  style='width: 80px; height: 70px' class='card-img-top'>"+ x.title + "</div><div class='col-lg-2 mt-3 fw-bolder'> $"+ x.precio + " </div><div class='col-lg-2'>  <button class='btn-eliminar mb-2 mt-3' value="+x.id+" name='removeElement' id="+index+">Eliminar</button></div></div>";
     })
-    totalItems.innerHTML = "<b> Precio total: $" +Math.abs(suma)+"</b>";
+
+    if(suma == 0){
+        totalItems.style.display = 'none';
+    }
+    else{
+        totalItems.innerHTML = "<b> Precio total: $" +Math.abs(suma)+"</b>";
+    }
 
     if(items.innerHTML == "")
         document.getElementById("footer-carrito").style.display  = "inline";
@@ -76,6 +82,7 @@ let totalItems = document.getElementById('total-items');
 document.querySelectorAll("#btn-comprar").forEach((e) => {
     e.addEventListener("click", () => {
         items.innerHTML = "";
+        totalItems.style.display = 'inline';
         let result = casacas.find(x=>x.id == e.value);
         listCasacas.push(result);
             localStorage.setItem('casacas',JSON.stringify(listCasacas));
@@ -91,6 +98,8 @@ document.querySelectorAll("#btn-comprar").forEach((e) => {
 
             if(localStorage != null)
                     document.getElementById("footer-carrito").style.display = "none";
+
+        
 
         });
 });
