@@ -18,13 +18,20 @@ Swal.fire({
 const listCasacas = [];
 let casacas = [];
 
-fetch('./js/listcasacas.json') //un json dentro del proyecto con la info en español
-    .then((response) =>  response.json())
-    .then((data) => {
-        console.log("JSON: "+data)
-        casacas = data;
-        console.log(casacas)
-    })
+// fetch('./js/listcasacas.json') //un json dentro del proyecto con la info en español
+//     .then((response) =>  response.json())
+//     .then((data) => {
+//         console.log("JSON: "+data)
+//         casacas = data;
+//         console.log(casacas)
+//     })
+traerCasacasJson();
+
+const traerCasacasJson = async () => {
+    const respuesta = await fetch('./js/listcasacas.json');
+    const dataJson = await respuesta.json();
+    casacas = dataJson;
+}
 
 const items = document.getElementById('items');
 
@@ -105,22 +112,21 @@ document.querySelectorAll("#btn-comprar").forEach((e) => {
         comprarItems.style.display = 'inline';
         let result = casacas.find(x=>x.id == e.value);
         listCasacas.push(result);
-            localStorage.setItem('casacas',JSON.stringify(listCasacas));
-            let list= JSON.parse(localStorage.getItem ('casacas'));
-            let suma = 0;
+        localStorage.setItem('casacas',JSON.stringify(listCasacas));
+        let list= JSON.parse(localStorage.getItem ('casacas'));
+        let suma = 0;
 
-            list.forEach((x,index)=>{
-                suma = suma + x.precio;
-                items.innerHTML += "<div class='row col-lg-9'><div class='col-lg-5'><img src= "+ x.file +"  style='width: 80px; height: 70px' class='card-img-top'>"+ x.title + "</div><div class='col-lg-2 mt-3 fw-bolder'> $"+ x.precio + " </div><div class='col-lg-2'>  <button class='btn-eliminar mb-2 mt-3' value="+x.id+" name='removeElement' id="+index+">Eliminar</button></div></div>";
+        list.forEach((x,index)=>{
+            suma = suma + x.precio;
+            items.innerHTML += "<div class='row col-lg-9'><div class='col-lg-5'><img src= "+ x.file +"  style='width: 80px; height: 70px' class='card-img-top'>"+ x.title + "</div><div class='col-lg-2 mt-3 fw-bolder'> $"+ x.precio + " </div><div class='col-lg-2'>  <button class='btn-eliminar mb-2 mt-3' value="+x.id+" name='removeElement' id="+index+">Eliminar</button></div></div>";
 
-            })
-            totalItems.innerHTML = "<b>Precio total: $" +Math.abs(suma)+"</b>";
-            comprarItems.innerHTML = "<div><button class='btn-comprar' id='comprar-btn'>Finalizar compra</button></div>";
+        })
+        totalItems.innerHTML = "<b>Precio total: $" +Math.abs(suma)+"</b>";
+        comprarItems.innerHTML = "<div><button class='btn-comprar' id='comprar-btn'>Finalizar compra</button></div>";
 
-            if(localStorage != null)
-                    document.getElementById("footer-carrito").style.display = "none";
-
-        
+        if(localStorage != null)
+                document.getElementById("footer-carrito").style.display = "none";
+       
 
         });
 });
