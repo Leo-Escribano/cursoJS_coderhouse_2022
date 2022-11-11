@@ -18,9 +18,6 @@ Swal.fire({
 const listCasacas = [];
 let casacas = [];
 
-traerCasacasJson().then(data=>   {
-    casacas = data;
-});
 
 const traerCasacasJson = async () => {
     const respuesta = await fetch('./js/listcasacas.json');
@@ -28,6 +25,9 @@ const traerCasacasJson = async () => {
     return dataJson;
 }
 
+traerCasacasJson().then(data=>   {
+    casacas = data;
+});
 const items = document.getElementById('items');
 
 
