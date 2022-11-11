@@ -1,88 +1,107 @@
+//Uso de librería como alerta de ingreso al sitio//
+
+Swal.fire({
+    title: 'Ingresaste a Casacashop.',
+    text: 'Aquí podrás encontrar las mejores camisetas oficiales de equipos de fútbol.',
+    confirmButtonText: 'VER OFERTAS',
+    backdrop: '#000000',
+    showClass: {
+    popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+    popup: 'animate__animated animate__fadeOutUp'
+}
+})
+
+//Array de objeto de camisetas//
+
 const listCasacas = [];
+const casacas = [];
 
-//CAMISETAS//
+fetch('./js/listcasacas.json') //un json dentro del proyecto con la info en español
+    .then((response) =>  response.json())
+    .then((data) => {
+        console.log("JSON: "+data)
+        // casacas = data;
+    })
 
-const argentina = {
-    "precio": 35000,
-    "id": 1,
-    "file": 'img/arg2022.jpg',
-    "title": "Selección de Argentina",
-    }
-
-const alemania = {
-    "precio": 15000,
-    "id": 2,
-    "file": 'img/alemania.jpg',
-    "title": "Selección de Alemania",
-}
-
-const espania = {
-    "precio": 18000,
-    "id": 3,
-    "file": 'img/espana.jpg',
-    "title": "Selección de España",
-}
-
-const japon = {
-    "precio": 12000,
-    "id": 4,
-    "file": 'img/japon.jpg',
-    "title": "Selección de Japón",
-}
-
-const francia = {
-    "precio": 20000,
-    "id": 5,
-    "file": 'img/francia-opo.jpg',
-    "title": "Selección de Francia",
-}
-
-const independiente = {
-    "precio": 7500,
-    "id": 6,
-    "file": 'img/indep.jpg',
-    "title": "Club Atlético Independiente",
-}
 const items = document.getElementById('items');
 
-const casacas = [argentina, alemania, espania, japon, francia, independiente];
 
 let selectCasacas = document.getElementById('btn-comprar');
 
-items.addEventListener('click', e => {
-    let remove = document.getElementsByName('removeElement');
-    console.log(e.target.id);
-    listCasacas.splice(parseInt(e.target.id), 1);
-    localStorage.removeItem('casacas');
-    localStorage.setItem('casacas',JSON.stringify(listCasacas));
-    items.innerHTML = "";
-    let suma = 0;
-    listCasacas.forEach((x,index)=>{
-        console.log(suma)
-        suma = suma - x.precio;
-        items.innerHTML += "<div class='row col-lg-9'><div class='col-lg-5'><img src= "+ x.file +"  style='width: 80px; height: 70px' class='card-img-top'>"+ x.title + "</div><div class='col-lg-2 mt-3 fw-bolder'> $"+ x.precio + " </div><div class='col-lg-2'>  <button class='btn-eliminar mb-2 mt-3' value="+x.id+" name='removeElement' id="+index+">Eliminar</button></div></div>";
-    })
+// Función para borrar ítems del carrito//
 
-    if(suma == 0){
+document.addEventListener('click',function(e){
+    if(e.target && e.target.name== 'removeElement'){
+        let remove = document.getElementsByName('removeElement');
+        listCasacas.splice(parseInt(e.target.id), 1);
+        localStorage.removeItem('casacas');
+        localStorage.setItem('casacas',JSON.stringify(listCasacas));
+        items.innerHTML = "";
+        let suma = 0;
+        listCasacas.forEach((x,index)=>{
+            suma = suma - x.precio;
+            items.innerHTML += "<div class='row col-lg-9'><div class='col-lg-5'><img src= "+ x.file +"  style='width: 80px; height: 70px' class='card-img-top'>"+ x.title + "</div><div class='col-lg-2 mt-3 fw-bolder'> $"+ x.precio + " </div><div class='col-lg-2'>  <button class='btn-eliminar mb-2 mt-3' value="+x.id+" name='removeElement' id="+index+">Eliminar</button></div></div>";
+        })
+    
+        if(suma == 0){
+            totalItems.style.display = 'none';
+            comprarItems.style.display = 'none';
+        }
+        else{
+            totalItems.innerHTML = "<b> Precio total: $" +Math.abs(suma)+"</b>";
+            comprarItems.innerHTML = "<div><button id='comprar-btn' class='btn-comprar'>Finalizar compra</button></div>";
+    
+        }
+    
+        if(items.innerHTML == "")
+            document.getElementById("footer-carrito").style.display  = "inline";
+    
+    
+    }
+});
+
+let totalItems = document.getElementById('total-items');
+let comprarItems = document.getElementById('comprar-btn');
+
+//Alert para confirmar o cancelar compra//
+
+comprarItems.addEventListener("click", () => {
+    Swal.fire({
+        title: '¿Querés finalizar la compra?',
+        text: "Tu carrito está listo.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonText: 'Cancelar',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, quiero comprar.'
+    }).then((result) => {
+        if (result.isConfirmed) {
         totalItems.style.display = 'none';
-    }
-    else{
-        totalItems.innerHTML = "<b> Precio total: $" +Math.abs(suma)+"</b>";
-    }
-
-    if(items.innerHTML == "")
+        comprarItems.style.display = 'none';
         document.getElementById("footer-carrito").style.display  = "inline";
-
-
+        localStorage.removeItem('casacas')
+        listCasacas.splice(0, listCasacas.length);
+        items.innerHTML = "";
+            Swal.fire(
+            'Tu compra fue realizada con éxito.',
+            'Gracias por confiar en CASACASHOP.',
+            'success',
+        )
+        }
+    })
 })
 
 
-let totalItems = document.getElementById('total-items');
+//Función para agregar ítems en el carrito//
 
 document.querySelectorAll("#btn-comprar").forEach((e) => {
     e.addEventListener("click", () => {
         items.innerHTML = "";
         totalItems.style.display = 'inline';
+        comprarItems.style.display = 'inline';
         let result = casacas.find(x=>x.id == e.value);
         listCasacas.push(result);
             localStorage.setItem('casacas',JSON.stringify(listCasacas));
@@ -95,6 +114,7 @@ document.querySelectorAll("#btn-comprar").forEach((e) => {
 
             })
             totalItems.innerHTML = "<b>Precio total: $" +Math.abs(suma)+"</b>";
+            comprarItems.innerHTML = "<div><button class='btn-comprar' id='comprar-btn'>Finalizar compra</button></div>";
 
             if(localStorage != null)
                     document.getElementById("footer-carrito").style.display = "none";
@@ -104,3 +124,5 @@ document.querySelectorAll("#btn-comprar").forEach((e) => {
         });
 });
 
+
+//Resta un json con info para usar, fetch, promesas y asincronía. Revisar que no aparezcan errores por consola. Sacar console.log TODOS

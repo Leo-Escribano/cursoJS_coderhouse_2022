@@ -1,0 +1,45 @@
+ [
+        {
+            "nombrePais": "argentina",
+            "precio": 35000,
+            "id": 1,
+            "file": "img/arg2022.jpg",
+            "title": "Selección de Argentina"
+        },
+        {
+            "nombrePais": "alemania",
+            "precio": 15000,
+            "id": 2,
+            "file": "img/alemania.jpg",
+            "title": "Selección de Alemania"
+        },
+        {
+            "nombrePais": "espania",
+            "precio": 18000,
+            "id": 3,
+            "file": "img/espana.jpg",
+            "title": "Selección de España"
+        },
+        {
+            "nombrePais": "japon",
+            "precio": 12000,
+            "id": 4,
+            "file": "img/japon.jpg",
+            "title": "Selección de Japón"
+        },
+        {
+            "nombrePais": "francia",
+            "precio": 20000,
+            "id": 5,
+            "file": "img/francia-opo.jpg",
+            "title": "Selección de Francia"
+        },
+        {
+            "nombrePais": "independiente",
+            "precio": 7500,
+            "id": 6,
+            "file": "img/indep.jpg",
+            "title": "Club Atlético Independiente"
+        }
+    ]
+}
