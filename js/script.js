@@ -18,19 +18,14 @@ Swal.fire({
 const listCasacas = [];
 let casacas = [];
 
-// fetch('./js/listcasacas.json') //un json dentro del proyecto con la info en español
-//     .then((response) =>  response.json())
-//     .then((data) => {
-//         console.log("JSON: "+data)
-//         casacas = data;
-//         console.log(casacas)
-//     })
-traerCasacasJson();
+traerCasacasJson().then(data=>   {
+    casacas = data;
+});
 
 const traerCasacasJson = async () => {
     const respuesta = await fetch('./js/listcasacas.json');
     const dataJson = await respuesta.json();
-    casacas = dataJson;
+    return dataJson;
 }
 
 const items = document.getElementById('items');
