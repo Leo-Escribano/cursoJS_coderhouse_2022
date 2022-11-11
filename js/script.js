@@ -22,7 +22,8 @@ fetch('./js/listcasacas.json') //un json dentro del proyecto con la info en espa
     .then((response) =>  response.json())
     .then((data) => {
         console.log("JSON: "+data)
-        // casacas = data;
+        casacas = data;
+        console.log(casacas)
     })
 
 const items = document.getElementById('items');
