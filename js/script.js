@@ -16,7 +16,7 @@ Swal.fire({
 //Array de objeto de camisetas//
 
 const listCasacas = [];
-const casacas = [];
+let casacas = [];
 
 fetch('./js/listcasacas.json') //un json dentro del proyecto con la info en español
     .then((response) =>  response.json())
